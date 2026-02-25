@@ -1,64 +1,78 @@
-❤️ Heart Disease Risk Prediction (End-to-End ML Deployment)
-📌 Project Overview
+# ❤️ Heart Disease Risk Prediction (End-to-End ML Deployment)
 
-This project predicts the 10-year risk of Coronary Heart Disease (CHD) using the Framingham Heart Study dataset.
+## 📌 Project Overview
 
-The objective was not just to train a model, but to build a complete end-to-end machine learning system, including:
+This project predicts the **10-year risk of Coronary Heart Disease (CHD)** using the Framingham Heart Study dataset.
 
-Data preprocessing
+The goal was not only to train a machine learning model, but to build a **complete end-to-end ML system**, including:
 
-Model tuning
+- Data preprocessing
+- Model tuning
+- Handling imbalanced classification
+- Threshold optimization
+- REST API deployment
+- Frontend integration
+- Cloud deployment (Render)
 
-Imbalanced classification handling
+---
 
-Threshold optimization
+## 🚀 Live Demo
 
-REST API deployment
+🔹 **Frontend (Streamlit UI):**  
+https://your-frontend-url.onrender.com  
 
-Frontend integration
+🔹 **Backend API (FastAPI):**  
+https://your-backend-url.onrender.com  
 
-Production deployment on Render
+---
 
-🚀 Live Demo
+## 🧠 Problem Statement
 
-🔹 Frontend (Streamlit UI):
-[Add your Streamlit URL here]
+Early detection of cardiovascular disease risk is critical.
 
-🔹 Backend API (FastAPI):
-[Add your FastAPI URL here]
+This project builds a **screening-oriented model** that prioritizes **recall**, reducing false negatives in high-risk patients.
 
-🧠 Problem Statement
+---
+
+## 📊 Dataset
+
+- Source: Framingham Heart Study
+- Target Variable: `TenYearCHD`
+- Total Features: 14 clinical & lifestyle parameters including:
+
+  - Age  
+  - Gender  
+  - Blood Pressure (Systolic & Diastolic)  
+  - BMI  
+  - Total Cholesterol  
+  - Glucose  
+  - Smoking status  
+  - Diabetes  
+  - Heart Rate  
+
+## 🧠 Problem Statement
 
 Early detection of cardiovascular risk is crucial.
 This project focuses on building a screening-oriented model that prioritizes recall, reducing false negatives in high-risk patients.
 
-📊 Dataset
+## 📊 Dataset
 
 Source: Framingham Heart Study
 
 Target Variable: TenYearCHD
 
 Features: 14 clinical & lifestyle parameters including:
-
-Age
-
-Blood Pressure
-
-BMI
-
-Cholesterol
-
-Glucose
-
-Smoking status
-
-Diabetes
-
-Heart rate
-
+- Age
+- Blood Pressure
+- BMI
+- Cholesterol
+- Glucose
+- Smoking status
+- Diabetes
+- Heart rate
 etc.
 
-⚙️ ML Pipeline
+## ⚙️ ML Pipeline
 
 A production-ready Scikit-learn Pipeline was used:
 
@@ -67,37 +81,20 @@ Pipeline([
     ("scaler", StandardScaler()),
     ("lr", LogisticRegression(max_iter=3000, class_weight="balanced"))
 ])
-Why Logistic Regression?
 
-Interpretable (important for healthcare)
+## 🔍 Model Optimization
+- Train/Test Split (Stratified)
+- 5-Fold Cross Validation
+- GridSearchCV for hyperparameter tuning
 
-Provides coefficient-level feature insights
+### Evaluation metrics:
+- ROC-AUC
+- Precision-Recall Curve
+- F1 Score
+- Confusion Matrix
+- Calibration Curve
 
-Stable baseline model
-
-Works well with standardized medical data
-
-🔍 Model Optimization
-
-Train/Test Split (Stratified)
-
-5-Fold Cross Validation
-
-GridSearchCV for hyperparameter tuning
-
-Evaluation metrics:
-
-ROC-AUC
-
-Precision-Recall Curve
-
-F1 Score
-
-Confusion Matrix
-
-Calibration Curve
-
-📈 Model Performance
+## 📈 Model Performance
 Metric	Score
 Cross-Validated ROC-AUC	~0.73
 Test ROC-AUC	~0.70
@@ -113,70 +110,7 @@ Reduce false negatives
 
 Suit screening use-case
 
-🏗 System Architecture
-User → Streamlit Frontend → FastAPI Backend → ML Pipeline → Prediction
-Backend
-
-FastAPI
-
-Uvicorn
-
-Deployed on Render
-
-Frontend
-
-Streamlit
-
-Calls backend via REST API
-
-Deployed as separate Render service
-
-🧪 API Endpoint
-POST /predict
-
-Request Body:
-
-{
-  "male": 1,
-  "age": 45,
-  "currentSmoker": 0,
-  "cigsPerDay": 0,
-  "BPMeds": 0,
-  "prevalentStroke": 0,
-  "prevalentHyp": 0,
-  "diabetes": 0,
-  "totChol": 200,
-  "sysBP": 120,
-  "diaBP": 80,
-  "BMI": 25,
-  "heartRate": 70,
-  "glucose": 90
-}
-
-Response:
-
-{
-  "predicted_risk_probability": 0.19,
-  "risk_label": "Low Risk"
-}
-🚀 Deployment Details
-Backend
-
-Platform: Render
-
-Python Service
-
-Cold-start aware handling
-
-Frontend
-
-Platform: Render
-
-Separate Web Service
-
-Timeout & error handling added
-
-🔒 Production Considerations
+## 🔒 Production Considerations
 
 Preprocessing pipeline saved using joblib
 
@@ -188,7 +122,7 @@ Proper exception handling in frontend
 
 Status code validation before JSON parsing
 
-📁 Project Structure
+## 📁 Project Structure
 backend/
   ├── app/
   │   ├── main.py
@@ -200,7 +134,8 @@ backend/
 frontend/
   ├── app.py
   └── requirements.txt
-🛠 Tech Stack
+
+## 🛠 Tech Stack
 
 Python
 
@@ -216,7 +151,7 @@ Render
 
 GitHub
 
-🎯 Key Learnings
+## 🎯 Key Learnings
 
 Importance of ML pipelines in production
 
@@ -230,7 +165,7 @@ Debugging API errors in live environment
 
 Separation of frontend and backend services
 
-🔮 Future Improvements
+## 🔮 Future Improvements
 
 Compare with XGBoost / LightGBM
 
@@ -241,8 +176,3 @@ Improve calibration
 Add model versioning
 
 Add monitoring & logging
-
-👩‍💻 Author
-
-Darshna Choudhary
-Machine Learning & Backend Enthusiast
