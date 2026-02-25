@@ -35,7 +35,7 @@ def predict(data: PatientData):
         data.diaBP, data.BMI, data.heartRate, data.glucose
     ]])
     
-    probability = model.predict_proba(input_scaled)[0][1]
+    probability = model.predict_proba(input_data)[0][1]
     
     return {
         "predicted_risk_probability": float(probability),
