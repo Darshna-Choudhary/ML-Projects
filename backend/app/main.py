@@ -17,7 +17,10 @@ app.add_middleware(
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
-scaler = joblib.load(os.path.join(BASE_DIR, "scaler.pkl"))
+
+# Load scaler if it exists
+scaler_path = os.path.join(BASE_DIR, "scaler.pkl")
+scaler = joblib.load(scaler_path) if os.path.exists(scaler_path) else None
 
 @app.get("/")
 def home():
@@ -32,8 +35,12 @@ def predict(data: PatientData):
         data.diaBP, data.BMI, data.heartRate, data.glucose
     ]])
 
-    input_scaled = scaler.transform(input_data)
-    probability = model.predict_proba(input_data)[0][1]
+    if scaler:
+        input_scaled = scaler.transform(input_data)
+    else:
+        input_scaled = input_data
+    
+    probability = model.predict_proba(input_scaled)[0][1]
     
     return {
         "predicted_risk_probability": float(probability),
