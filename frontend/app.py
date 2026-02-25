@@ -44,7 +44,16 @@ if st.button("Predict Risk"):
     API_URL = "https://heart-disease-risk-prediction-dd7j.onrender.com/predict"
 
     try:
-        response = requests.post(API_URL, json=data, timeout=30)
+        response = requests.post(API_URL, json=data, timeout=60)
+
+        if response.status_code != 200:
+            st.error(f"Backend Error: {response.status_code}")
+            st.write(response.text)
+            st.stop()
+
+        if not response.text:
+            st.warning("Backend is waking up. Please try again in a few seconds.")
+            st.stop()
 
         result = response.json()
 
@@ -57,6 +66,8 @@ if st.button("Predict Risk"):
             st.error(f"High Risk ⚠️\nProbability: {probability:.2f}")
         else:
             st.success(f"Low Risk ✅\nProbability: {probability:.2f}")
-    
+
+    except requests.exceptions.Timeout:
+        st.warning("Backend is waking up (cold start). Try again in 20 seconds.")
     except Exception as e:
-        st.error(f"API Error: {e}")
+        st.error(f"Unexpected API Error: {e}")
