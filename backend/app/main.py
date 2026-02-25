@@ -37,3 +37,11 @@ def predict(data: PatientData):
         "predicted_risk_probability": float(probability),
         "risk_label": "High Risk" if probability >= 0.4 else "Low Risk"
     }
+
+@app.get("/health")
+def health():
+    return {
+        "status": "ok",
+        "service": "heart-disease-api",
+        "model_loaded": True
+    }
