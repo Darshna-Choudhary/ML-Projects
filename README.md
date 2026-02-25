@@ -95,84 +95,37 @@ Pipeline([
 - Calibration Curve
 
 ## 📈 Model Performance
-Metric	Score
-Cross-Validated ROC-AUC	~0.73
-Test ROC-AUC	~0.70
-F1 Score (Positive Class)	~0.35
-Recall (Threshold = 0.4)	~0.77
-Threshold Optimization
+- Metric	Score
+- Cross-Validated ROC-AUC	~0.73
+- Test ROC-AUC	~0.70
+- F1 Score (Positive Class)	~0.35
+- Recall (Threshold = 0.4)	~0.77
+- Threshold Optimization
 
 Instead of using default 0.5 threshold, a lower threshold (0.4) was chosen to:
-
-Increase recall
-
-Reduce false negatives
-
-Suit screening use-case
+- Increase recall
+- Reduce false negatives
+- Suit screening use-case
 
 ## 🔒 Production Considerations
+- Preprocessing pipeline saved using joblib
+- No data leakage
+- Class imbalance handled via class_weight="balanced"
+- Proper exception handling in frontend
+- Status code validation before JSON parsing
 
-Preprocessing pipeline saved using joblib
-
-No data leakage
-
-Class imbalance handled via class_weight="balanced"
-
-Proper exception handling in frontend
-
-Status code validation before JSON parsing
-
-## 📁 Project Structure
-backend/
-  ├── app/
-  │   ├── main.py
-  │   ├── model.pkl
-  │   └── schema.py
-  ├── requirements.txt
-  └── runtime.txt
-
-frontend/
-  ├── app.py
-  └── requirements.txt
-
-## 🛠 Tech Stack
-
-Python
-
-Scikit-learn
-
-FastAPI
-
-Streamlit
-
-Uvicorn
-
-Render
-
-GitHub
 
 ## 🎯 Key Learnings
-
-Importance of ML pipelines in production
-
-Handling imbalanced datasets
-
-Threshold tuning for business objectives
-
-Cold-start behavior in cloud deployments
-
-Debugging API errors in live environment
-
-Separation of frontend and backend services
+- Importance of ML pipelines in production
+- Handling imbalanced datasets
+- Threshold tuning for business objectives
+- Cold-start behavior in cloud deployments
+- Debugging API errors in live environment
+- Separation of frontend and backend services
 
 ## 🔮 Future Improvements
-
-Compare with XGBoost / LightGBM
-
-Add SHAP interpretability
-
-Improve calibration
-
-Add model versioning
-
-Add monitoring & logging
+- Compare with XGBoost / LightGBM
+- Add SHAP interpretability
+- Improve calibration
+- Add model versioning
+- Add monitoring & logging
