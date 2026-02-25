@@ -1,11 +1,23 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import numpy as np
+import os
 from app.schema import PatientData
 
 app = FastAPI()
 
-model = joblib.load("app/model.pkl")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # For production, replace "*" with your Streamlit URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
+scaler = joblib.load(os.path.join(BASE_DIR, "scaler.pkl"))
 
 @app.get("/")
 def home():
@@ -20,6 +32,7 @@ def predict(data: PatientData):
         data.diaBP, data.BMI, data.heartRate, data.glucose
     ]])
 
+    input_scaled = scaler.transform(input_data)
     probability = model.predict_proba(input_data)[0][1]
     
     return {

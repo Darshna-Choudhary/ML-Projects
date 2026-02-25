@@ -41,11 +41,10 @@ if st.button("Predict Risk"):
         "glucose": glucose
     }
 
+    API_URL = "https://your-backend-name.onrender.com/predict"
+
     try:
-        response = requests.post(
-            "http://127.0.0.1:8000/predict",
-            json=data
-        )
+        response = requests.post(API_URL, json=data, timeout=30)
 
         result = response.json()
 
@@ -58,6 +57,6 @@ if st.button("Predict Risk"):
             st.error(f"High Risk ⚠️\nProbability: {probability:.2f}")
         else:
             st.success(f"Low Risk ✅\nProbability: {probability:.2f}")
-
-    except:
-        st.error("⚠️ Could not connect to backend API.")
+    
+    except Exception as e:
+        st.error(f"API Error: {e}")
